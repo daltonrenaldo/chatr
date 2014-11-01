@@ -1,0 +1,38 @@
+<head>
+  <title>chatroom</title>
+</head>
+
+<body>
+  <div class="module"> 
+    <header class="top-bar">
+      <h1>Chatr</h1>
+      {{> loginButtons}}
+    </header>
+    
+    {{> chat}}
+  </div>
+  
+</body>
+
+<template name="chat">
+  <ol class="discussion">
+    {{#each messages}}
+      <li class="{{ messageClass }}">
+        <div class="avatar">
+          <!-- <img src="http://www.gravatar.com/avatar/844a5b0154f0f12abfb5cdbc247704fb?s=48&d=wavatar" /> -->
+        </div>
+        <div class="messages">
+          <p>{{ text }}</p>
+          <time>{{username}} • {{createdAt}}</time>
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+
+  {{#if currentUser}}
+    <form action="#" class="input">
+      <input type="text" name= "msg" id="msg" autocomplete="off" placeholder="say something">
+      <input type="submit" value="send">
+    </form>
+  {{/if}}
+</template>
