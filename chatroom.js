@@ -1,4 +1,6 @@
 Messages = new Mongo.Collection('messages');
+
+// prevents client to write to Messages collection
 Messages.allow({});
 
 if (Meteor.isClient) {
@@ -24,6 +26,7 @@ if (Meteor.isClient) {
     'submit .input': function (event) {
       var text = event.target.msg.value; 
 
+      // calls the server side Method that writes to the collection
       Meteor.call("addMessage", text);
 
       event.target.msg.value = "";
@@ -39,6 +42,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
+    // removes all the messages when the server restart
     Messages.remove({});
 
     Meteor.methods({
